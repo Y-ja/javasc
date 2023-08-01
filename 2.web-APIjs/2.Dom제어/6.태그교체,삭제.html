@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="KO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="food-items">
+        <li class="food">사과</li>
+        <li class="food">바나나</li>
+        <li class="food">체리</li>
+      </ul>
+  <script>
+     const $food = document.getElementById('food-items');
+     const[$apple , $banana ,$cherry] = [...$food.children];
+
+     const $newDiv = document.createElement('div');
+     $newDiv.textContent = '박스';
+
+     $food.replaceChild($newDiv, $banana);
+
+     $food.removeChild($apple);
+     
+    $food.innerHTML = '';
+     [... $food.children].forEach($child => $food.removeChild($child));
+
+    //  const $newLi = document.createElement('li');
+    //  $newLi.textContent = '애플망고';
+
+    // //  $food.insertBefore($newLi, $food.firstElementChild);
+    //  $food.insertBefore($newLi, document.querySelector('li:nth-child(2)'));
+
+    //  $food.appendChild($apple);
+    //  $food.insertBefore($newLi,$cherry);
+  </script>    
+</body>
+</html>
