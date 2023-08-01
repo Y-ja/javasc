@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #greet span{
+            color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="greet">
+        Hello <span class="hight">World!</span>
+    </div>
+
+    <ul id="food-items">
+      <li class="food">순대</li>
+      <li class="food">튀김</li>
+      <li class="food">떡볶이</li>
+    </ul>
+    <script>
+        const $greet = document.getElementById('greet');
+
+        console.log($greet.textContent.trim());
+        console.log($greet.innerHTML);
+
+        // $greet.firstElementChild.textContent = ' JavaSC^^';
+
+        $greet.innerHTML = 'Hello <span>JavaSC^^</span>'
+
+        const $foods = document.getElementById('food-items');
+        $foods.innerHTML += '<li class="food"족발</li>';
+        $foods.innerHTML = '';
+            
+    </script>
+</body>
+</html>
