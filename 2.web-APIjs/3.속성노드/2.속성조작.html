@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #item{
+            width: 100px;
+            height: 100px;
+            background: lightsteelblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="item" title="안녕"></div>
+    <script>
+        const $box = document.getElementById('item');
+        const title = $box.getAttribute('title');
+        console.log(`title ---> ${title}`);
+
+        $box.setAttribute('id','vanila');
+        $box.setAttribute('id','item');
+
+        $box.setAttribute('style','border-radius : 50%');
+
+        $box.removeAttribute('style');
+
+        console.log($box.hasAttribute('src'));
+    </script>
+</body>
+</html>
