@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .box{
+        width: 100px;
+        height: 100px;
+        background: lightblue;
+        margin: 20px;
+    }
+    .red{
+        background: tomato;
+    }
+    .green{
+       background: yellowgreen;
+    }
+</style>
+<body>
+    <div class="box" onclick="alert('클릭!')" onmouseleave="boxClickAlertHandler()"></div>
+    <div class="box green"></div>
+    <div class="box red " onclick="onmouseleave" ></div>
+
+    <script>
+        function boxClickAlertHandler() {
+            alert('하늘색 박스 클릭');
+        }
+
+        const growup = function () {
+            const $redBox  = document.querySelector('.red');
+            $redBox.style.width = '200px';
+        }
+        const makeTextHandler = () =>{
+            const $greenBox = document.querySelector('.green');
+            $greenBox.textContent = 'HELLO'
+        }
+    </script>
+</body>
+</html>
