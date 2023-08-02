@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrap">
+        <u1 id="fruits">
+            <li class="apple">사과</li>
+            <li class="banana">바나나</li>
+            <li class="grape">포도</li>
+        </u1>
+    </div>
+    <script>
+        const $fruits = document.getElementById('fruits');
+        const $wrap = $fruits.parentElement;
+        const[$apple , $banana , $grape] = [...$wrap.firstElementChild.children];
+
+     const sameFlag   
+        = $banana.previousElementSibling === $apple;
+     console.log(sameFlag); 
+    //  $grape.parentElement.parentElement.nextElementSibling; 
+    console.log('--closest 함수--');
+    const $found = $grape.closest('.wrap');
+    console.log($found);
+    console.log('--아래쪽 방향 탐색--');
+    $grape.querySelector('a');
+    </script>
+</body>
+</html>

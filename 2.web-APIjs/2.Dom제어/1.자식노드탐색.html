@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <u1 id="fruits">
+        <li class="apple">사과</li>
+        <li class="banana">바나나</li>
+        <li class="grape">포도</li>
+    </u1>
+
+    <div class="box">
+       <p></p>
+    </div>
+    <script>
+        const $fruits = document.getElementById('fruits');
+        const $childen = [...$fruits.children];
+        console.log('$fruits');
+
+        const $first = $fruits.firstElementChild;
+        const $last = $fruits.firstElementChild;
+
+        $fruits.style.fontSize = '2em';
+        $last.style.width = 'fit-content';
+        $last.style.transform = 'rotate(180deg)';
+
+            // function hasChildren($tag) {
+            //     return !!$tag.children.length;
+            // }
+        const hasChildren = $tag => !!tag.children.length;
+        console.log('--------자식태그의 유무 확인-------------');
+        const $box = document.querySelector('.box');
+        console.log(hasChildren($box));
+    </script>
+</body>
+</html>
