@@ -19,8 +19,7 @@
     width: 100%;
   }
   
-  #results,
-  #calculator {
+ .card {
     margin: 2rem auto;
     width: 40rem;
     max-width: 90%;
@@ -77,4 +76,3 @@
     margin-top: 1rem;
     text-align: center;
   }
-  

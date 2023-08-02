@@ -9,6 +9,7 @@ const $currentResultOutput = document.getElementById('current-result');
 const $currentCalculationOutput = document.getElementById('current-calculation');
 
 function outputResult(result, text) {
+    const $logEntries = document.querySelector('.log-entries');
   $currentResultOutput.textContent = result;
   $currentCalculationOutput.textContent = text;
 }
