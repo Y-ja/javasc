@@ -18,13 +18,28 @@ class Product {
   console.log(p1);
   const p2 = new Product(
     "쩝쩝이",
-    "https://www.animaxtv.co.kr/sites/animaxtv.co.kr/files/ct_character_f_primary_image/nyamnyam.jpg",
-    7000,
+    "https://blog.kakaocdn.net/dn/ZUIle/btrv0PIfT4N/48ioWXIFULnPuWH088TgAk/img.jpg",
     "쩝쩝꿀꿀박사님 점심을 추천해주세요~"
   );
   console.log(p2);
   
-  
+  //화면 상단부 장바구니
+class ShoppingCart{
+    constructor(){
+        //장바구니 담은 제품저장
+        this.cartItem = [];
+    }
+    render(){
+        const $cart = document.createElement('section');
+        $cart.classList.add('cart');
+        $cart.innerHTML=`
+        <h2>총액 0원</h2>
+        <button>주문하기</button>  
+        `;
+        return $cart;
+    }
+}
+
   // 한개의 LI태그를 생성하는 컴포넌트 클래스 설계
   class ProductItem {
     constructor(product) {
@@ -87,7 +102,7 @@ class Product {
   
     render() {
       // console.log('render!!', this);
-      const $app = document.getElementById("app");
+    
       const $prodList = document.createElement("ul");
       $prodList.classList.add("product-list");
       this.products.forEach((prod) => {
@@ -95,9 +110,20 @@ class Product {
         // console.log(productItem);
         $prodList.appendChild(productItem.render());
       });
-      $app.appendChild($prodList);
+     return $prodList;
     }
   }
+//쇼핑카드와 프로덕트리스트 렌덩링
+class Shop{
+    constructor(){
+      this.render();
+    }
+    render(){
+        const $app = document.getElementById('app');
+        $app.appendChild(new ShoppingCart().render());
+        $app.appendChild(new ProductList().render());
+    }
+}
+
   // 렌더링 명령
-  const productList = new ProductList();
-  productList.render();
+new Shop();
