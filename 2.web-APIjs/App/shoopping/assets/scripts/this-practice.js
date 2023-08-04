@@ -46,9 +46,9 @@ console.log('-------------bind--------------');
 const bindedSayHello = sayHello.bind(park,'멍청','섹시섹시');
 bindedSayHello();
 
-const evenHandler = (fruit,e) =>{
+const evenHandler = (fruit,e) => {
     console.log('이벤트 -->',e);
-    console.log('과일명 -->',fruit);
+    console.log('과일명 -->', fruit);
     // console.log(this);
 };
 const $text = document.querySelector('input')
