@@ -11,70 +11,112 @@ class Product {
   // 객체 생성
   const p1 = new Product(
     "냠냠이",
-    "https://mblogthumb-phinf.pstatic.net/MjAxNzAxMTdfMTQy/MDAxNDg0NjMxMzkwODE5.CuY3PCiQL66H6KAog0TtFOFq5Wo8VZOC_9x9GJfDg_Ag.xGrlIHTm-Rn7-HpQk5y0pbSaFuPT73nNlqRYaEphkcwg.JPEG.ansrud0995/%ED%95%98%EC%A0%95%EC%9A%B0_%EB%A8%B9%EB%B0%A9.jpg?type=w800",
-    2000,
+    "https://res.heraldm.com/content/image/2013/03/05/20130305000034_1.jpg",
     "냠냠박사님 맛있게 밥을 먹어주세요~"
   );
-  console.log(p1);
+  // console.log(p1);
   const p2 = new Product(
     "쩝쩝이",
-    "https://blog.kakaocdn.net/dn/ZUIle/btrv0PIfT4N/48ioWXIFULnPuWH088TgAk/img.jpg",
+    "https://res.heraldm.com/content/image/2013/03/05/20130305000037_1.jpg",
+    7000,
     "쩝쩝꿀꿀박사님 점심을 추천해주세요~"
   );
-  console.log(p2);
+  // console.log(p2);
   
-  //화면 상단부 장바구니
-class ShoppingCart{
-    constructor(){
-        //장바구니 담은 제품저장
-        this.cartItem = [];
+  // 속성 객체를 만드는 클래스
+  class Attribute {
+    constructor(name, value) {
+      this.name = name;
+      this.value = value;
     }
-    render(){
-        const $cart = document.createElement('section');
-        $cart.classList.add('cart');
-        $cart.innerHTML=`
+  }
+  
+  // DOM을 생성하는 공통 클래스
+  class Component {
+    // tagId : 부모태그 역할을 할 태그의 id속성값
+    constructor(tagId) {
+      this.tagId = tagId;
+    }
+    // 태그를 생성하는 함수
+    // classnames = 'box blue circle'
+    createElement(
+      tagName = "",
+      classnames = "",
+      childHtml = "",
+      attributes = []
+    ) {
+      const $newTag = document.createElement(tagName);
+      if (classnames) $newTag.className = classnames;
+      if (attributes && attributes.length > 0) {
+        attributes.forEach((attr) => {
+          $newTag.setAttribute(attr.name, attr.value);
+        });
+      }
+      if (childHtml) $newTag.innerHTML = childHtml;
+      document.getElementById(this.tagId).appendChild($newTag);
+      return $newTag;
+    }
+  }
+  
+  // 화면 가장 상단부에 들어갈 장바구니 총액 정보 태그 생성 클래스
+  class ShoppingCart extends Component {
+    constructor(tagId) {
+      super(tagId);
+      // 장바구니에 담은 Product들을 저장
+      this.cartItems = [];
+    }
+  
+    render() {
+      const childHtml = `
         <h2>총액 0원</h2>
-        <button>주문하기</button>  
-        `;
-        return $cart;
+        <button>주문하기</button>
+      `;
+      this.createElement("section", "cart", childHtml, [
+        new Attribute("id", "cart-id"),
+        new Attribute("title", "add to cart"),
+      ]);
     }
-}
-
+  }
+  
   // 한개의 LI태그를 생성하는 컴포넌트 클래스 설계
-  class ProductItem {
-    constructor(product) {
+  class ProductItem extends Component {
+    constructor(product, tagId) {
+      super(tagId);
       this.product = product;
     }
-  //담기버튼 클릭 이벤트 핸들러
-  addToCarHandler(){
-    console.log('장바구니 상품추가');
-    //상품정보
-    console.log(this.product);
-  }
+  
+    // 담기버튼 클릭이벤트 핸들러
+    addToCartHandler() {
+      console.log("장바구니에 상품을 추가함!");
+      // 이 핸들러에서 누른 그 상품의 정보를 알아야 한다.
+      console.log(this.product);
+    }
+  
     render() {
-      const $prod = document.createElement("li");
-      $prod.classList.add("product-item");
-      $prod.innerHTML = `
-          <div>
-            <img src="${this.product.imageUrl}" alt="${this.product.title}">
-            <div class="product-item__content">
-              <h2>${this.product.title}</h2>
-              <h3>${this.product.price}원</h3>
-              <p>${this.product.description}</p>
-              <button>담기</button>
-            </div>
-          </div>
-        `;
-        const $addCarBtn = $prod.querySelector('button');
-        // $addCarBtn.addEventListener('click',this.addToCarHandler.bind(this));
-        $addCarBtn.addEventListener('click',( )=> this.addToCarHandler());
-        return $prod;
+      const childHtml = `
+      <div>
+        <img src="${this.product.imageUrl}" alt="${this.product.title}">
+        <div class="product-item__content">
+          <h2>${this.product.title}</h2>
+          <h3>${this.product.price}원</h3>
+          <p>${this.product.description}</p>
+          <button>담기</button>
+        </div>
+      </div>
+      `;
+      const $prod = this.createElement("li", "product-item", childHtml);
+  
+      const $addCartBtn = $prod.querySelector("button");
+      // $addCartBtn.addEventListener('click', this.addToCartHandler.bind(this));
+      $addCartBtn.addEventListener("click", () => this.addToCartHandler());
+      return $prod;
     }
   }
   
   // 한 개의 UL을 생성하는 클래스
-  class ProductList {
-    constructor() {
+  class ProductList extends Component {
+    constructor(tagId) {
+      super(tagId);
       // 상품들을 모아 놓은 배열
       this.products = [
         p1,
@@ -97,33 +139,32 @@ class ShoppingCart{
           60000,
           "맛있는 맹고~ 당장 사먹어야지~"
         ),
-      ]
+      ];
     } // end constructor
   
     render() {
-      // console.log('render!!', this);
-    
-      const $prodList = document.createElement("ul");
-      $prodList.classList.add("product-list");
+      this.createElement("ul", "product-list", "", [
+        new Attribute("id", "prod-list"),
+      ]);
+  
       this.products.forEach((prod) => {
-        const productItem = new ProductItem(prod);
-        // console.log(productItem);
-        $prodList.appendChild(productItem.render());
+        const productItem = new ProductItem(prod, "prod-list");
+        productItem.render();
       });
-     return $prodList;
     }
   }
-//쇼핑카드와 프로덕트리스트 렌덩링
-class Shop{
-    constructor(){
+  
+  // ShoppingCart와 ProductList를 합쳐서 렌더링처리하는 클래스
+  class Shop {
+    constructor() {
       this.render();
     }
-    render(){
-        const $app = document.getElementById('app');
-        $app.appendChild(new ShoppingCart().render());
-        $app.appendChild(new ProductList().render());
+  
+    render() {
+      new ShoppingCart("app").render();
+      new ProductList("app").render();
     }
-}
-
+  }
+  
   // 렌더링 명령
-new Shop();
+  new Shop();
