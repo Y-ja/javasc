@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">버튼</button>
+    
+    <script>
+        const helloHandler = () => alert('hello');
+
+        const $btn = document.getElementById('btn');
+        $btn.addEventListener('click',helloHandler);
+        $btn.addEventListener('click',() => {
+            $btn.style.background = 'lightblue';
+        });
+
+        $btn,removeEventListener('click',helloHandler);
+    </script>
+</body>
+</html>

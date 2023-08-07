@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xo</title>
+</head>
+<body>
+    <ul id="fruits">
+        <li>사과</li>
+    </ul>
+    <script>
+        function makeTag(tagName='div', text='') {
+            const $newTag = document.createElement(tagName);
+            if(text) $newTag.textContent = text;
+            return $newTag;
+        }
+
+        function appendNewTag($parent, $newChild) {
+            $parent.appendNewTag($newChild);
+        }
+
+        const $fruits = document.getElementById('fruits');
+        const a = makeTag('li','바나나');
+        // console.log(a);
+        function append($parent,tagName,text) {
+            appendNewTag($parent,makeTag(tagName,text));
+        }
+
+        appendNewTag($fruits,a);
+        appendNewTag($fruits,{tagName:'li', text:'망고'});
+        appendNewTag($fruits,makeTag('li','포도'));
+        appendNewTag($fruits,makeTag('li','레몬'));
+
+
+        
+
+        // const $newLiTag = document.createElement('li');
+        // console.log($newLiTag);
+
+        // $newLiTag.textContent = '바나나';
+        // console.log($newLiTag);
+
+        // const $fruits  = document.getElementById('fruits');
+        // $fruits.appendChild($newLiTag);
+    </script>
+</body>
+</html>
